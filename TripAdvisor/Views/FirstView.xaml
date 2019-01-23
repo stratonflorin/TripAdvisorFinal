@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="TripAdvisor.Views.FirstView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TripAdvisor.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Loaded="UserControl_Loaded"
+             d:DesignHeight="530" d:DesignWidth="1020">
+    
+    <UserControl.Resources>
+        <Style x:Key="Default" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Heebo"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="#FF074534"/>
+        </Style>
+
+        <Storyboard x:Key="ShowWelcome" Name="ShowWelcome">
+            <DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+                             Storyboard.TargetName="Textblock_welcome" From="0" To="1"
+                             BeginTime="0:0:0" Duration="0:0:2"/>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowStart" Name="ShowStart">
+            <DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+                             Storyboard.TargetName="Textblock_start" From="0" To="1"
+                             BeginTime="0:0:2" Duration="0:0:2"/>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowArrow" Name="ShowArrow">
+            <DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+                             Storyboard.TargetName="Design_arrow" From="0" To="1"
+                             BeginTime="0:0:4" Duration="0:0:2"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource ShowWelcome}"/>
+            <BeginStoryboard Storyboard="{StaticResource ShowStart}"/>
+            <BeginStoryboard Storyboard="{StaticResource ShowArrow}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid Background="AliceBlue">
+        <materialDesign:PackIcon Kind="SubdirectoryArrowLeft" Foreground="#FF074534" Height="150" Width="150" Opacity="0"
+                                 Margin="210,-10,0,0" RenderTransformOrigin="0.5,0.5" Name="Design_arrow">
+            <materialDesign:PackIcon.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="90"/>
+                </TransformGroup>
+            </materialDesign:PackIcon.RenderTransform>
+        </materialDesign:PackIcon>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding StringFormat=Welcome to Trip Advisor\,\{0\}!}" Style="{StaticResource Default}" Opacity="0"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Name="Textblock_welcome"/>
+            <TextBlock Text="Start your journey by picking a town" Style="{StaticResource Default}" Opacity="0"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Name="Textblock_start"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

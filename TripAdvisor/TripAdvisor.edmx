@@ -1,0 +1,1939 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TripAdvisorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Camere">
+          <Key>
+            <PropertyRef Name="CameraID" />
+          </Key>
+          <Property Name="CameraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CazareID" Type="int" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="5000" />
+          <Property Name="NumarPaturi" Type="int" Nullable="false" />
+          <Property Name="PretPerNoapte" Type="int" Nullable="false" />
+          <Property Name="Poza" Type="image" />
+        </EntityType>
+        <EntityType Name="CategoriiObiective">
+          <Key>
+            <PropertyRef Name="CategorieID" />
+          </Key>
+          <Property Name="CategorieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Poza" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cazare">
+          <Key>
+            <PropertyRef Name="CazareID" />
+          </Key>
+          <Property Name="CazareID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrasID" Type="int" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="5000" />
+          <Property Name="Stele" Type="int" Nullable="false" />
+          <Property Name="NrTelefon" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="Poza" Type="image" />
+        </EntityType>
+        <EntityType Name="Meniu">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="PreparatID" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="PreparatID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obiective">
+          <Key>
+            <PropertyRef Name="ObiectivID" />
+          </Key>
+          <Property Name="ObiectivID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Locatie" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="OrasID" Type="int" Nullable="false" />
+          <Property Name="CategorieID" Type="int" Nullable="false" />
+          <Property Name="Poza" Type="image" />
+        </EntityType>
+        <EntityType Name="Orase">
+          <Key>
+            <PropertyRef Name="OrasID" />
+          </Key>
+          <Property Name="OrasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TaraID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TripAdvisor.dbo.PozeActivitati' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PozeActivitati">
+          <Key>
+            <PropertyRef Name="ObiectivID" />
+            <PropertyRef Name="UtilizatorID" />
+            <PropertyRef Name="Poza" />
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="ObiectivID" Type="int" Nullable="false" />
+          <Property Name="UtilizatorID" Type="int" Nullable="false" />
+          <Property Name="Poza" Type="image" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TripAdvisor.dbo.PozeHotel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PozeHotel">
+          <Key>
+            <PropertyRef Name="CazareID" />
+            <PropertyRef Name="UtilizatorID" />
+            <PropertyRef Name="Poza" />
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="CazareID" Type="int" Nullable="false" />
+          <Property Name="UtilizatorID" Type="int" Nullable="false" />
+          <Property Name="Poza" Type="image" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TripAdvisor.dbo.PozeRestaurante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PozeRestaurante">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Poza" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Poza" Type="image" Nullable="false" />
+          <Property Name="Data" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Preparate">
+          <Key>
+            <PropertyRef Name="PreparatID" />
+          </Key>
+          <Property Name="PreparatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denumire" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Poza" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecenziiActivitati">
+          <Key>
+            <PropertyRef Name="RecenzieID" />
+          </Key>
+          <Property Name="RecenzieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ObiectivID" Type="int" Nullable="false" />
+          <Property Name="Stele" Type="int" Nullable="false" />
+          <Property Name="Comentarii" Type="varchar" MaxLength="5000" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecenziiHoteluri">
+          <Key>
+            <PropertyRef Name="RecenzieID" />
+          </Key>
+          <Property Name="RecenzieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CazareID" Type="int" Nullable="false" />
+          <Property Name="Stele" Type="int" Nullable="false" />
+          <Property Name="Pret" Type="int" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Comentarii" Type="varchar" MaxLength="5000" />
+        </EntityType>
+        <EntityType Name="RecenziiRestaurante">
+          <Key>
+            <PropertyRef Name="RecenzieID" />
+          </Key>
+          <Property Name="RecenzieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="Stele" Type="int" Nullable="false" />
+          <Property Name="Pret" Type="int" Nullable="false" />
+          <Property Name="Comentarii" Type="varchar" MaxLength="5000" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurante">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrasID" Type="int" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NumarTelefon" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Program" Type="varchar" MaxLength="255" />
+          <Property Name="Poza" Type="image" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TripAdvisor.dbo.Rezervari' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Rezervari">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="CameraID" />
+            <PropertyRef Name="DataCheckin" />
+            <PropertyRef Name="DataCheckout" />
+            <PropertyRef Name="DataRezervarii" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CameraID" Type="int" Nullable="false" />
+          <Property Name="DataCheckin" Type="datetime" Nullable="false" />
+          <Property Name="DataCheckout" Type="datetime" Nullable="false" />
+          <Property Name="DataRezervarii" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tari">
+          <Key>
+            <PropertyRef Name="TaraID" />
+          </Key>
+          <Property Name="TaraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizatori">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Prenume" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Parola" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NrTelefon" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Poza" Type="image" />
+        </EntityType>
+        <Association Name="FK__Camere__CazareID__33D4B598">
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="1" />
+          <End Role="Camere" Type="Self.Camere" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cazare">
+              <PropertyRef Name="CazareID" />
+            </Principal>
+            <Dependent Role="Camere">
+              <PropertyRef Name="CazareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cazare__OrasID__1CF15040">
+          <End Role="Orase" Type="Self.Orase" Multiplicity="1" />
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orase">
+              <PropertyRef Name="OrasID" />
+            </Principal>
+            <Dependent Role="Cazare">
+              <PropertyRef Name="OrasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meniu__PreparatI__29572725">
+          <End Role="Preparate" Type="Self.Preparate" Multiplicity="1" />
+          <End Role="Meniu" Type="Self.Meniu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Preparate">
+              <PropertyRef Name="PreparatID" />
+            </Principal>
+            <Dependent Role="Meniu">
+              <PropertyRef Name="PreparatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meniu__Restauran__286302EC">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="Meniu" Type="Self.Meniu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Meniu">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Obiective__Categ__2D27B809">
+          <End Role="CategoriiObiective" Type="Self.CategoriiObiective" Multiplicity="1" />
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriiObiective">
+              <PropertyRef Name="CategorieID" />
+            </Principal>
+            <Dependent Role="Obiective">
+              <PropertyRef Name="CategorieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Obiective__OrasI__2C3393D0">
+          <End Role="Orase" Type="Self.Orase" Multiplicity="1" />
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orase">
+              <PropertyRef Name="OrasID" />
+            </Principal>
+            <Dependent Role="Obiective">
+              <PropertyRef Name="OrasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orase__TaraID__182C9B23">
+          <End Role="Tari" Type="Self.Tari" Multiplicity="1" />
+          <End Role="Orase" Type="Self.Orase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tari">
+              <PropertyRef Name="TaraID" />
+            </Principal>
+            <Dependent Role="Orase">
+              <PropertyRef Name="TaraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeActiv__Obiec__3D5E1FD2">
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="1" />
+          <End Role="PozeActivitati" Type="Self.PozeActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiective">
+              <PropertyRef Name="ObiectivID" />
+            </Principal>
+            <Dependent Role="PozeActivitati">
+              <PropertyRef Name="ObiectivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeActiv__Utili__3E52440B">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="PozeActivitati" Type="Self.PozeActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PozeActivitati">
+              <PropertyRef Name="UtilizatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeHotel__Cazar__398D8EEE">
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="1" />
+          <End Role="PozeHotel" Type="Self.PozeHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cazare">
+              <PropertyRef Name="CazareID" />
+            </Principal>
+            <Dependent Role="PozeHotel">
+              <PropertyRef Name="CazareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeHotel__Utili__3A81B327">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="PozeHotel" Type="Self.PozeHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PozeHotel">
+              <PropertyRef Name="UtilizatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeResta__Resta__2F10007B">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="PozeRestaurante" Type="Self.PozeRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="PozeRestaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeResta__UserI__300424B4">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="PozeRestaurante" Type="Self.PozeRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PozeRestaurante">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiA__Obiec__4CA06362">
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="1" />
+          <End Role="RecenziiActivitati" Type="Self.RecenziiActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiective">
+              <PropertyRef Name="ObiectivID" />
+            </Principal>
+            <Dependent Role="RecenziiActivitati">
+              <PropertyRef Name="ObiectivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiA__UserI__4BAC3F29">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="RecenziiActivitati" Type="Self.RecenziiActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecenziiActivitati">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiH__Cazar__4316F928">
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="1" />
+          <End Role="RecenziiHoteluri" Type="Self.RecenziiHoteluri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cazare">
+              <PropertyRef Name="CazareID" />
+            </Principal>
+            <Dependent Role="RecenziiHoteluri">
+              <PropertyRef Name="CazareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiH__UserI__4222D4EF">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="RecenziiHoteluri" Type="Self.RecenziiHoteluri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecenziiHoteluri">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiR__Resta__47DBAE45">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="RecenziiRestaurante" Type="Self.RecenziiRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="RecenziiRestaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiR__UserI__46E78A0C">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="RecenziiRestaurante" Type="Self.RecenziiRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecenziiRestaurante">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__OrasI__25869641">
+          <End Role="Orase" Type="Self.Orase" Multiplicity="1" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orase">
+              <PropertyRef Name="OrasID" />
+            </Principal>
+            <Dependent Role="Restaurante">
+              <PropertyRef Name="OrasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervari__Camer__36B12243">
+          <End Role="Camere" Type="Self.Camere" Multiplicity="1" />
+          <End Role="Rezervari" Type="Self.Rezervari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Camere">
+              <PropertyRef Name="CameraID" />
+            </Principal>
+            <Dependent Role="Rezervari">
+              <PropertyRef Name="CameraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervari__UserI__35BCFE0A">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="Rezervari" Type="Self.Rezervari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rezervari">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="getActivities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getActivitiesbyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getActivitiesCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActivityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getActivitiesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActivityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getActivitiesPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ObiectivID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getActivityReviews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="activityId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getHotelDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cazareId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getHotelPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cazareID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getHotelReviews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cazareId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getHotelRoomPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getHotelRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cazareId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getHotels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getHotelsByRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+          <Parameter Name="NumarPaturi" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPreparate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getRestaurantDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="restId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getRestaurantMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="restId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getRestaurantPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="restaurantID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getRestaurantReviews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="restId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getRestaurants" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getRestaurantsByFood" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+          <Parameter Name="Foodtype" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getTop3Activities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getTop3Hotels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getTop3Restaurants" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Oras" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="TripAdvisorModelStoreContainer">
+          <EntitySet Name="Camere" EntityType="Self.Camere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriiObiective" EntityType="Self.CategoriiObiective" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cazare" EntityType="Self.Cazare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meniu" EntityType="Self.Meniu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obiective" EntityType="Self.Obiective" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orase" EntityType="Self.Orase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preparate" EntityType="Self.Preparate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecenziiActivitati" EntityType="Self.RecenziiActivitati" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecenziiHoteluri" EntityType="Self.RecenziiHoteluri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecenziiRestaurante" EntityType="Self.RecenziiRestaurante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurante" EntityType="Self.Restaurante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tari" EntityType="Self.Tari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizatori" EntityType="Self.Utilizatori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PozeActivitati" EntityType="Self.PozeActivitati" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PozeActivitati].[ObiectivID] AS [ObiectivID], 
+    [PozeActivitati].[UtilizatorID] AS [UtilizatorID], 
+    [PozeActivitati].[Poza] AS [Poza], 
+    [PozeActivitati].[Data] AS [Data]
+    FROM [dbo].[PozeActivitati] AS [PozeActivitati]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PozeHotel" EntityType="Self.PozeHotel" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PozeHotel].[CazareID] AS [CazareID], 
+    [PozeHotel].[UtilizatorID] AS [UtilizatorID], 
+    [PozeHotel].[Poza] AS [Poza], 
+    [PozeHotel].[Data] AS [Data]
+    FROM [dbo].[PozeHotel] AS [PozeHotel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PozeRestaurante" EntityType="Self.PozeRestaurante" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PozeRestaurante].[RestaurantID] AS [RestaurantID], 
+    [PozeRestaurante].[UserID] AS [UserID], 
+    [PozeRestaurante].[Poza] AS [Poza], 
+    [PozeRestaurante].[Data] AS [Data]
+    FROM [dbo].[PozeRestaurante] AS [PozeRestaurante]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Rezervari" EntityType="Self.Rezervari" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Rezervari].[UserID] AS [UserID], 
+    [Rezervari].[CameraID] AS [CameraID], 
+    [Rezervari].[DataCheckin] AS [DataCheckin], 
+    [Rezervari].[DataCheckout] AS [DataCheckout], 
+    [Rezervari].[DataRezervarii] AS [DataRezervarii]
+    FROM [dbo].[Rezervari] AS [Rezervari]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Camere__CazareID__33D4B598" Association="Self.FK__Camere__CazareID__33D4B598">
+            <End Role="Cazare" EntitySet="Cazare" />
+            <End Role="Camere" EntitySet="Camere" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cazare__OrasID__1CF15040" Association="Self.FK__Cazare__OrasID__1CF15040">
+            <End Role="Orase" EntitySet="Orase" />
+            <End Role="Cazare" EntitySet="Cazare" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meniu__PreparatI__29572725" Association="Self.FK__Meniu__PreparatI__29572725">
+            <End Role="Preparate" EntitySet="Preparate" />
+            <End Role="Meniu" EntitySet="Meniu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meniu__Restauran__286302EC" Association="Self.FK__Meniu__Restauran__286302EC">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="Meniu" EntitySet="Meniu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Obiective__Categ__2D27B809" Association="Self.FK__Obiective__Categ__2D27B809">
+            <End Role="CategoriiObiective" EntitySet="CategoriiObiective" />
+            <End Role="Obiective" EntitySet="Obiective" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Obiective__OrasI__2C3393D0" Association="Self.FK__Obiective__OrasI__2C3393D0">
+            <End Role="Orase" EntitySet="Orase" />
+            <End Role="Obiective" EntitySet="Obiective" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orase__TaraID__182C9B23" Association="Self.FK__Orase__TaraID__182C9B23">
+            <End Role="Tari" EntitySet="Tari" />
+            <End Role="Orase" EntitySet="Orase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeActiv__Obiec__3D5E1FD2" Association="Self.FK__PozeActiv__Obiec__3D5E1FD2">
+            <End Role="Obiective" EntitySet="Obiective" />
+            <End Role="PozeActivitati" EntitySet="PozeActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeActiv__Utili__3E52440B" Association="Self.FK__PozeActiv__Utili__3E52440B">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="PozeActivitati" EntitySet="PozeActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeHotel__Cazar__398D8EEE" Association="Self.FK__PozeHotel__Cazar__398D8EEE">
+            <End Role="Cazare" EntitySet="Cazare" />
+            <End Role="PozeHotel" EntitySet="PozeHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeHotel__Utili__3A81B327" Association="Self.FK__PozeHotel__Utili__3A81B327">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="PozeHotel" EntitySet="PozeHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeResta__Resta__2F10007B" Association="Self.FK__PozeResta__Resta__2F10007B">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="PozeRestaurante" EntitySet="PozeRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeResta__UserI__300424B4" Association="Self.FK__PozeResta__UserI__300424B4">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="PozeRestaurante" EntitySet="PozeRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiA__Obiec__4CA06362" Association="Self.FK__RecenziiA__Obiec__4CA06362">
+            <End Role="Obiective" EntitySet="Obiective" />
+            <End Role="RecenziiActivitati" EntitySet="RecenziiActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiA__UserI__4BAC3F29" Association="Self.FK__RecenziiA__UserI__4BAC3F29">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="RecenziiActivitati" EntitySet="RecenziiActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiH__Cazar__4316F928" Association="Self.FK__RecenziiH__Cazar__4316F928">
+            <End Role="Cazare" EntitySet="Cazare" />
+            <End Role="RecenziiHoteluri" EntitySet="RecenziiHoteluri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiH__UserI__4222D4EF" Association="Self.FK__RecenziiH__UserI__4222D4EF">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="RecenziiHoteluri" EntitySet="RecenziiHoteluri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiR__Resta__47DBAE45" Association="Self.FK__RecenziiR__Resta__47DBAE45">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="RecenziiRestaurante" EntitySet="RecenziiRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiR__UserI__46E78A0C" Association="Self.FK__RecenziiR__UserI__46E78A0C">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="RecenziiRestaurante" EntitySet="RecenziiRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__OrasI__25869641" Association="Self.FK__Restauran__OrasI__25869641">
+            <End Role="Orase" EntitySet="Orase" />
+            <End Role="Restaurante" EntitySet="Restaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervari__Camer__36B12243" Association="Self.FK__Rezervari__Camer__36B12243">
+            <End Role="Camere" EntitySet="Camere" />
+            <End Role="Rezervari" EntitySet="Rezervari" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervari__UserI__35BCFE0A" Association="Self.FK__Rezervari__UserI__35BCFE0A">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="Rezervari" EntitySet="Rezervari" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TripAdvisorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Camere">
+          <Key>
+            <PropertyRef Name="CameraID" />
+          </Key>
+          <Property Name="CameraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CazareID" Type="Int32" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="NumarPaturi" Type="Int32" Nullable="false" />
+          <Property Name="PretPerNoapte" Type="Int32" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Cazare" Relationship="Self.FK__Camere__CazareID__33D4B598" FromRole="Camere" ToRole="Cazare" />
+          <NavigationProperty Name="Rezervari" Relationship="Self.FK__Rezervari__Camer__36B12243" FromRole="Camere" ToRole="Rezervari" />
+        </EntityType>
+        <EntityType Name="CategoriiObiective">
+          <Key>
+            <PropertyRef Name="CategorieID" />
+          </Key>
+          <Property Name="CategorieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denumire" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Obiective" Relationship="Self.FK__Obiective__Categ__2D27B809" FromRole="CategoriiObiective" ToRole="Obiective" />
+        </EntityType>
+        <EntityType Name="Cazare">
+          <Key>
+            <PropertyRef Name="CazareID" />
+          </Key>
+          <Property Name="CazareID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrasID" Type="Int32" Nullable="false" />
+          <Property Name="Nume" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Stele" Type="Int32" Nullable="false" />
+          <Property Name="NrTelefon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Camere" Relationship="Self.FK__Camere__CazareID__33D4B598" FromRole="Cazare" ToRole="Camere" />
+          <NavigationProperty Name="Orase" Relationship="Self.FK__Cazare__OrasID__1CF15040" FromRole="Cazare" ToRole="Orase" />
+          <NavigationProperty Name="PozeHotel" Relationship="Self.FK__PozeHotel__Cazar__398D8EEE" FromRole="Cazare" ToRole="PozeHotel" />
+          <NavigationProperty Name="RecenziiHoteluri" Relationship="Self.FK__RecenziiH__Cazar__4316F928" FromRole="Cazare" ToRole="RecenziiHoteluri" />
+        </EntityType>
+        <EntityType Name="Obiective">
+          <Key>
+            <PropertyRef Name="ObiectivID" />
+          </Key>
+          <Property Name="ObiectivID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denumire" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Locatie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrasID" Type="Int32" Nullable="false" />
+          <Property Name="CategorieID" Type="Int32" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="CategoriiObiective" Relationship="Self.FK__Obiective__Categ__2D27B809" FromRole="Obiective" ToRole="CategoriiObiective" />
+          <NavigationProperty Name="Orase" Relationship="Self.FK__Obiective__OrasI__2C3393D0" FromRole="Obiective" ToRole="Orase" />
+          <NavigationProperty Name="PozeActivitati" Relationship="Self.FK__PozeActiv__Obiec__3D5E1FD2" FromRole="Obiective" ToRole="PozeActivitati" />
+          <NavigationProperty Name="RecenziiActivitati" Relationship="Self.FK__RecenziiA__Obiec__4CA06362" FromRole="Obiective" ToRole="RecenziiActivitati" />
+        </EntityType>
+        <EntityType Name="Orase">
+          <Key>
+            <PropertyRef Name="OrasID" />
+          </Key>
+          <Property Name="OrasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TaraID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cazare" Relationship="Self.FK__Cazare__OrasID__1CF15040" FromRole="Orase" ToRole="Cazare" />
+          <NavigationProperty Name="Obiective" Relationship="Self.FK__Obiective__OrasI__2C3393D0" FromRole="Orase" ToRole="Obiective" />
+          <NavigationProperty Name="Tari" Relationship="Self.FK__Orase__TaraID__182C9B23" FromRole="Orase" ToRole="Tari" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK__Restauran__OrasI__25869641" FromRole="Orase" ToRole="Restaurante" />
+        </EntityType>
+        <EntityType Name="Preparate">
+          <Key>
+            <PropertyRef Name="PreparatID" />
+          </Key>
+          <Property Name="PreparatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denumire" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.Meniu" FromRole="Preparate" ToRole="Restaurante" />
+        </EntityType>
+        <EntityType Name="RecenziiActivitati">
+          <Key>
+            <PropertyRef Name="RecenzieID" />
+          </Key>
+          <Property Name="RecenzieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ObiectivID" Type="Int32" Nullable="false" />
+          <Property Name="Stele" Type="Int32" Nullable="false" />
+          <Property Name="Comentarii" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Obiective" Relationship="Self.FK__RecenziiA__Obiec__4CA06362" FromRole="RecenziiActivitati" ToRole="Obiective" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__RecenziiA__UserI__4BAC3F29" FromRole="RecenziiActivitati" ToRole="Utilizatori" />
+        </EntityType>
+        <EntityType Name="RecenziiHoteluri">
+          <Key>
+            <PropertyRef Name="RecenzieID" />
+          </Key>
+          <Property Name="RecenzieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CazareID" Type="Int32" Nullable="false" />
+          <Property Name="Stele" Type="Int32" Nullable="false" />
+          <Property Name="Pret" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comentarii" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cazare" Relationship="Self.FK__RecenziiH__Cazar__4316F928" FromRole="RecenziiHoteluri" ToRole="Cazare" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__RecenziiH__UserI__4222D4EF" FromRole="RecenziiHoteluri" ToRole="Utilizatori" />
+        </EntityType>
+        <EntityType Name="RecenziiRestaurante">
+          <Key>
+            <PropertyRef Name="RecenzieID" />
+          </Key>
+          <Property Name="RecenzieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="Stele" Type="Int32" Nullable="false" />
+          <Property Name="Pret" Type="Int32" Nullable="false" />
+          <Property Name="Comentarii" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK__RecenziiR__Resta__47DBAE45" FromRole="RecenziiRestaurante" ToRole="Restaurante" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__RecenziiR__UserI__46E78A0C" FromRole="RecenziiRestaurante" ToRole="Utilizatori" />
+        </EntityType>
+        <EntityType Name="Restaurante">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrasID" Type="Int32" Nullable="false" />
+          <Property Name="Nume" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumarTelefon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Program" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Orase" Relationship="Self.FK__Restauran__OrasI__25869641" FromRole="Restaurante" ToRole="Orase" />
+          <NavigationProperty Name="RecenziiRestaurante" Relationship="Self.FK__RecenziiR__Resta__47DBAE45" FromRole="Restaurante" ToRole="RecenziiRestaurante" />
+          <NavigationProperty Name="PozeRestaurante" Relationship="Self.FK__PozeResta__Resta__2F10007B" FromRole="Restaurante" ToRole="PozeRestaurante" />
+          <NavigationProperty Name="Preparate" Relationship="Self.Meniu" FromRole="Restaurante" ToRole="Preparate" />
+        </EntityType>
+        <EntityType Name="Tari">
+          <Key>
+            <PropertyRef Name="TaraID" />
+          </Key>
+          <Property Name="TaraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orase" Relationship="Self.FK__Orase__TaraID__182C9B23" FromRole="Tari" ToRole="Orase" />
+        </EntityType>
+        <EntityType Name="Utilizatori">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenume" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parola" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NrTelefon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="RecenziiActivitati" Relationship="Self.FK__RecenziiA__UserI__4BAC3F29" FromRole="Utilizatori" ToRole="RecenziiActivitati" />
+          <NavigationProperty Name="RecenziiHoteluri" Relationship="Self.FK__RecenziiH__UserI__4222D4EF" FromRole="Utilizatori" ToRole="RecenziiHoteluri" />
+          <NavigationProperty Name="RecenziiRestaurante" Relationship="Self.FK__RecenziiR__UserI__46E78A0C" FromRole="Utilizatori" ToRole="RecenziiRestaurante" />
+          <NavigationProperty Name="PozeActivitati" Relationship="Self.FK__PozeActiv__Utili__3E52440B" FromRole="Utilizatori" ToRole="PozeActivitati" />
+          <NavigationProperty Name="PozeHotel" Relationship="Self.FK__PozeHotel__Utili__3A81B327" FromRole="Utilizatori" ToRole="PozeHotel" />
+          <NavigationProperty Name="PozeRestaurante" Relationship="Self.FK__PozeResta__UserI__300424B4" FromRole="Utilizatori" ToRole="PozeRestaurante" />
+          <NavigationProperty Name="Rezervari" Relationship="Self.FK__Rezervari__UserI__35BCFE0A" FromRole="Utilizatori" ToRole="Rezervari" />
+        </EntityType>
+        <EntityType Name="PozeActivitati">
+          <Key>
+            <PropertyRef Name="ObiectivID" />
+            <PropertyRef Name="UtilizatorID" />
+            <PropertyRef Name="Poza" />
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="ObiectivID" Type="Int32" Nullable="false" />
+          <Property Name="UtilizatorID" Type="Int32" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Obiective" Relationship="Self.FK__PozeActiv__Obiec__3D5E1FD2" FromRole="PozeActivitati" ToRole="Obiective" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__PozeActiv__Utili__3E52440B" FromRole="PozeActivitati" ToRole="Utilizatori" />
+        </EntityType>
+        <EntityType Name="PozeHotel">
+          <Key>
+            <PropertyRef Name="CazareID" />
+            <PropertyRef Name="UtilizatorID" />
+            <PropertyRef Name="Poza" />
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="CazareID" Type="Int32" Nullable="false" />
+          <Property Name="UtilizatorID" Type="Int32" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Cazare" Relationship="Self.FK__PozeHotel__Cazar__398D8EEE" FromRole="PozeHotel" ToRole="Cazare" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__PozeHotel__Utili__3A81B327" FromRole="PozeHotel" ToRole="Utilizatori" />
+        </EntityType>
+        <EntityType Name="PozeRestaurante">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Poza" />
+          </Key>
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Poza" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK__PozeResta__Resta__2F10007B" FromRole="PozeRestaurante" ToRole="Restaurante" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__PozeResta__UserI__300424B4" FromRole="PozeRestaurante" ToRole="Utilizatori" />
+        </EntityType>
+        <EntityType Name="Rezervari">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="CameraID" />
+            <PropertyRef Name="DataCheckin" />
+            <PropertyRef Name="DataCheckout" />
+            <PropertyRef Name="DataRezervarii" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CameraID" Type="Int32" Nullable="false" />
+          <Property Name="DataCheckin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataCheckout" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataRezervarii" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Camere" Relationship="Self.FK__Rezervari__Camer__36B12243" FromRole="Rezervari" ToRole="Camere" />
+          <NavigationProperty Name="Utilizatori" Relationship="Self.FK__Rezervari__UserI__35BCFE0A" FromRole="Rezervari" ToRole="Utilizatori" />
+        </EntityType>
+        <Association Name="FK__Camere__CazareID__33D4B598">
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="1" />
+          <End Role="Camere" Type="Self.Camere" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cazare">
+              <PropertyRef Name="CazareID" />
+            </Principal>
+            <Dependent Role="Camere">
+              <PropertyRef Name="CazareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervari__Camer__36B12243">
+          <End Role="Camere" Type="Self.Camere" Multiplicity="1" />
+          <End Role="Rezervari" Type="Self.Rezervari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Camere">
+              <PropertyRef Name="CameraID" />
+            </Principal>
+            <Dependent Role="Rezervari">
+              <PropertyRef Name="CameraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Obiective__Categ__2D27B809">
+          <End Role="CategoriiObiective" Type="Self.CategoriiObiective" Multiplicity="1" />
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriiObiective">
+              <PropertyRef Name="CategorieID" />
+            </Principal>
+            <Dependent Role="Obiective">
+              <PropertyRef Name="CategorieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cazare__OrasID__1CF15040">
+          <End Role="Orase" Type="Self.Orase" Multiplicity="1" />
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orase">
+              <PropertyRef Name="OrasID" />
+            </Principal>
+            <Dependent Role="Cazare">
+              <PropertyRef Name="OrasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeHotel__Cazar__398D8EEE">
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="1" />
+          <End Role="PozeHotel" Type="Self.PozeHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cazare">
+              <PropertyRef Name="CazareID" />
+            </Principal>
+            <Dependent Role="PozeHotel">
+              <PropertyRef Name="CazareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiH__Cazar__4316F928">
+          <End Role="Cazare" Type="Self.Cazare" Multiplicity="1" />
+          <End Role="RecenziiHoteluri" Type="Self.RecenziiHoteluri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cazare">
+              <PropertyRef Name="CazareID" />
+            </Principal>
+            <Dependent Role="RecenziiHoteluri">
+              <PropertyRef Name="CazareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Obiective__OrasI__2C3393D0">
+          <End Role="Orase" Type="Self.Orase" Multiplicity="1" />
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orase">
+              <PropertyRef Name="OrasID" />
+            </Principal>
+            <Dependent Role="Obiective">
+              <PropertyRef Name="OrasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeActiv__Obiec__3D5E1FD2">
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="1" />
+          <End Role="PozeActivitati" Type="Self.PozeActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiective">
+              <PropertyRef Name="ObiectivID" />
+            </Principal>
+            <Dependent Role="PozeActivitati">
+              <PropertyRef Name="ObiectivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiA__Obiec__4CA06362">
+          <End Role="Obiective" Type="Self.Obiective" Multiplicity="1" />
+          <End Role="RecenziiActivitati" Type="Self.RecenziiActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiective">
+              <PropertyRef Name="ObiectivID" />
+            </Principal>
+            <Dependent Role="RecenziiActivitati">
+              <PropertyRef Name="ObiectivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orase__TaraID__182C9B23">
+          <End Role="Tari" Type="Self.Tari" Multiplicity="1" />
+          <End Role="Orase" Type="Self.Orase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tari">
+              <PropertyRef Name="TaraID" />
+            </Principal>
+            <Dependent Role="Orase">
+              <PropertyRef Name="TaraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__OrasI__25869641">
+          <End Role="Orase" Type="Self.Orase" Multiplicity="1" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orase">
+              <PropertyRef Name="OrasID" />
+            </Principal>
+            <Dependent Role="Restaurante">
+              <PropertyRef Name="OrasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiA__UserI__4BAC3F29">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="RecenziiActivitati" Type="Self.RecenziiActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecenziiActivitati">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiH__UserI__4222D4EF">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="RecenziiHoteluri" Type="Self.RecenziiHoteluri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecenziiHoteluri">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiR__Resta__47DBAE45">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="RecenziiRestaurante" Type="Self.RecenziiRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="RecenziiRestaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecenziiR__UserI__46E78A0C">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="RecenziiRestaurante" Type="Self.RecenziiRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecenziiRestaurante">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeResta__Resta__2F10007B">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="PozeRestaurante" Type="Self.PozeRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="PozeRestaurante">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeActiv__Utili__3E52440B">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="PozeActivitati" Type="Self.PozeActivitati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PozeActivitati">
+              <PropertyRef Name="UtilizatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeHotel__Utili__3A81B327">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="PozeHotel" Type="Self.PozeHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PozeHotel">
+              <PropertyRef Name="UtilizatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PozeResta__UserI__300424B4">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="PozeRestaurante" Type="Self.PozeRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PozeRestaurante">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezervari__UserI__35BCFE0A">
+          <End Role="Utilizatori" Type="Self.Utilizatori" Multiplicity="1" />
+          <End Role="Rezervari" Type="Self.Rezervari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizatori">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rezervari">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Meniu">
+          <End Role="Preparate" Type="Self.Preparate" Multiplicity="*" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TripAdvisorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Camere" EntityType="Self.Camere" />
+          <EntitySet Name="CategoriiObiective" EntityType="Self.CategoriiObiective" />
+          <EntitySet Name="Cazare" EntityType="Self.Cazare" />
+          <EntitySet Name="Obiective" EntityType="Self.Obiective" />
+          <EntitySet Name="Orase" EntityType="Self.Orase" />
+          <EntitySet Name="Preparate" EntityType="Self.Preparate" />
+          <EntitySet Name="RecenziiActivitati" EntityType="Self.RecenziiActivitati" />
+          <EntitySet Name="RecenziiHoteluri" EntityType="Self.RecenziiHoteluri" />
+          <EntitySet Name="RecenziiRestaurante" EntityType="Self.RecenziiRestaurante" />
+          <EntitySet Name="Restaurante" EntityType="Self.Restaurante" />
+          <EntitySet Name="Tari" EntityType="Self.Tari" />
+          <EntitySet Name="Utilizatori" EntityType="Self.Utilizatori" />
+          <EntitySet Name="PozeActivitati" EntityType="Self.PozeActivitati" />
+          <EntitySet Name="PozeHotel" EntityType="Self.PozeHotel" />
+          <EntitySet Name="PozeRestaurante" EntityType="Self.PozeRestaurante" />
+          <EntitySet Name="Rezervari" EntityType="Self.Rezervari" />
+          <AssociationSet Name="FK__Camere__CazareID__33D4B598" Association="Self.FK__Camere__CazareID__33D4B598">
+            <End Role="Cazare" EntitySet="Cazare" />
+            <End Role="Camere" EntitySet="Camere" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervari__Camer__36B12243" Association="Self.FK__Rezervari__Camer__36B12243">
+            <End Role="Camere" EntitySet="Camere" />
+            <End Role="Rezervari" EntitySet="Rezervari" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Obiective__Categ__2D27B809" Association="Self.FK__Obiective__Categ__2D27B809">
+            <End Role="CategoriiObiective" EntitySet="CategoriiObiective" />
+            <End Role="Obiective" EntitySet="Obiective" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cazare__OrasID__1CF15040" Association="Self.FK__Cazare__OrasID__1CF15040">
+            <End Role="Orase" EntitySet="Orase" />
+            <End Role="Cazare" EntitySet="Cazare" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeHotel__Cazar__398D8EEE" Association="Self.FK__PozeHotel__Cazar__398D8EEE">
+            <End Role="Cazare" EntitySet="Cazare" />
+            <End Role="PozeHotel" EntitySet="PozeHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiH__Cazar__4316F928" Association="Self.FK__RecenziiH__Cazar__4316F928">
+            <End Role="Cazare" EntitySet="Cazare" />
+            <End Role="RecenziiHoteluri" EntitySet="RecenziiHoteluri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Obiective__OrasI__2C3393D0" Association="Self.FK__Obiective__OrasI__2C3393D0">
+            <End Role="Orase" EntitySet="Orase" />
+            <End Role="Obiective" EntitySet="Obiective" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeActiv__Obiec__3D5E1FD2" Association="Self.FK__PozeActiv__Obiec__3D5E1FD2">
+            <End Role="Obiective" EntitySet="Obiective" />
+            <End Role="PozeActivitati" EntitySet="PozeActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiA__Obiec__4CA06362" Association="Self.FK__RecenziiA__Obiec__4CA06362">
+            <End Role="Obiective" EntitySet="Obiective" />
+            <End Role="RecenziiActivitati" EntitySet="RecenziiActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orase__TaraID__182C9B23" Association="Self.FK__Orase__TaraID__182C9B23">
+            <End Role="Tari" EntitySet="Tari" />
+            <End Role="Orase" EntitySet="Orase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__OrasI__25869641" Association="Self.FK__Restauran__OrasI__25869641">
+            <End Role="Orase" EntitySet="Orase" />
+            <End Role="Restaurante" EntitySet="Restaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiA__UserI__4BAC3F29" Association="Self.FK__RecenziiA__UserI__4BAC3F29">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="RecenziiActivitati" EntitySet="RecenziiActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiH__UserI__4222D4EF" Association="Self.FK__RecenziiH__UserI__4222D4EF">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="RecenziiHoteluri" EntitySet="RecenziiHoteluri" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiR__Resta__47DBAE45" Association="Self.FK__RecenziiR__Resta__47DBAE45">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="RecenziiRestaurante" EntitySet="RecenziiRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecenziiR__UserI__46E78A0C" Association="Self.FK__RecenziiR__UserI__46E78A0C">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="RecenziiRestaurante" EntitySet="RecenziiRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeResta__Resta__2F10007B" Association="Self.FK__PozeResta__Resta__2F10007B">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="PozeRestaurante" EntitySet="PozeRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeActiv__Utili__3E52440B" Association="Self.FK__PozeActiv__Utili__3E52440B">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="PozeActivitati" EntitySet="PozeActivitati" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeHotel__Utili__3A81B327" Association="Self.FK__PozeHotel__Utili__3A81B327">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="PozeHotel" EntitySet="PozeHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PozeResta__UserI__300424B4" Association="Self.FK__PozeResta__UserI__300424B4">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="PozeRestaurante" EntitySet="PozeRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezervari__UserI__35BCFE0A" Association="Self.FK__Rezervari__UserI__35BCFE0A">
+            <End Role="Utilizatori" EntitySet="Utilizatori" />
+            <End Role="Rezervari" EntitySet="Rezervari" />
+          </AssociationSet>
+          <AssociationSet Name="Meniu" Association="Self.Meniu">
+            <End Role="Preparate" EntitySet="Preparate" />
+            <End Role="Restaurante" EntitySet="Restaurante" />
+          </AssociationSet>
+          <FunctionImport Name="getActivities" ReturnType="Collection(TripAdvisorModel.getActivities_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getActivitiesbyType" ReturnType="Collection(TripAdvisorModel.getActivitiesbyType_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getActivitiesCategory" ReturnType="Collection(String)">
+            <Parameter Name="ActivityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getActivitiesDetails" ReturnType="Collection(TripAdvisorModel.getActivitiesDetails_Result)">
+            <Parameter Name="ActivityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getActivitiesPhotos" ReturnType="Collection(TripAdvisorModel.getActivitiesPhotos_Result)">
+            <Parameter Name="ObiectivID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getActivityReviews" ReturnType="Collection(TripAdvisorModel.getActivityReviews_Result)">
+            <Parameter Name="activityId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getHotelDetails" ReturnType="Collection(TripAdvisorModel.getHotelDetails_Result)">
+            <Parameter Name="cazareId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getHotelPhotos" ReturnType="Collection(TripAdvisorModel.getHotelPhotos_Result)">
+            <Parameter Name="cazareID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getHotelReviews" ReturnType="Collection(TripAdvisorModel.getHotelReviews_Result)">
+            <Parameter Name="cazareId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getHotelRoomPhotos" ReturnType="Collection(TripAdvisorModel.getHotelRoomPhotos_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getHotelRooms" ReturnType="Collection(Int32)">
+            <Parameter Name="cazareId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getHotels" ReturnType="Collection(TripAdvisorModel.getHotels_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getHotelsByRooms" ReturnType="Collection(TripAdvisorModel.getHotelsByRooms_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+            <Parameter Name="NumarPaturi" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPreparate" ReturnType="Collection(TripAdvisorModel.getPreparate_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getRestaurantDetails" ReturnType="Collection(TripAdvisorModel.getRestaurantDetails_Result)">
+            <Parameter Name="restId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRestaurantMenu" ReturnType="Collection(String)">
+            <Parameter Name="restId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRestaurantPhotos" ReturnType="Collection(TripAdvisorModel.getRestaurantPhotos_Result)">
+            <Parameter Name="restaurantID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRestaurantReviews" ReturnType="Collection(TripAdvisorModel.getRestaurantReviews_Result)">
+            <Parameter Name="restId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRestaurants" ReturnType="Collection(TripAdvisorModel.getRestaurants_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getRestaurantsByFood" ReturnType="Collection(TripAdvisorModel.getRestaurantsByFood_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+            <Parameter Name="Foodtype" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getTop3Activities" ReturnType="Collection(TripAdvisorModel.getTop3Activities_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getTop3Hotels" ReturnType="Collection(TripAdvisorModel.getTop3Hotels_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getTop3Restaurants" ReturnType="Collection(TripAdvisorModel.getTop3Restaurants_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getTypes" ReturnType="Collection(TripAdvisorModel.getTypes_Result)">
+            <Parameter Name="Oras" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="getActivities_Result">
+          <Property Type="Int32" Name="ObiectivID" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getActivitiesbyType_Result">
+          <Property Type="Int32" Name="ObiectivID" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getActivitiesDetails_Result">
+          <Property Type="String" Name="Denumire" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getActivitiesPhotos_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Prenume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="Data" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="getActivityReviews_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="511" />
+          <Property Type="Int32" Name="Stele" Nullable="false" />
+          <Property Type="String" Name="Comentarii" Nullable="true" MaxLength="5000" />
+          <Property Type="DateTime" Name="Data" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getHotelDetails_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Adresa" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NrTelefon" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getHotelPhotos_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Prenume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="Data" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="getHotelReviews_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="511" />
+          <Property Type="Int32" Name="Stele" Nullable="false" />
+          <Property Type="Int32" Name="Pret" Nullable="false" />
+          <Property Type="String" Name="Comentarii" Nullable="true" MaxLength="5000" />
+          <Property Type="DateTime" Name="Data" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getHotelRoomPhotos_Result">
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Int32" Name="NumarPaturi" Nullable="false" />
+          <Property Type="Int32" Name="KindNumber" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getHotels_Result">
+          <Property Type="Int32" Name="CazareID" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Adresa" Nullable="true" MaxLength="5000" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getHotelsByRooms_Result">
+          <Property Type="Int32" Name="CazareID" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getPreparate_Result">
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="String" Name="Denumire" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="KindNumber" Nullable="true" />
+          <Property Type="Int32" Name="PreparatID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getRestaurantDetails_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Adresa" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NumarTelefon" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getRestaurantPhotos_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Prenume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="Data" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="getRestaurantReviews_Result">
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="511" />
+          <Property Type="Int32" Name="Stele" Nullable="false" />
+          <Property Type="Int32" Name="Pret" Nullable="false" />
+          <Property Type="String" Name="Comentarii" Nullable="true" MaxLength="5000" />
+          <Property Type="DateTime" Name="Data" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getRestaurants_Result">
+          <Property Type="Int32" Name="RestaurantID" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getRestaurantsByFood_Result">
+          <Property Type="Int32" Name="RestaurantID" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getTop3Activities_Result">
+          <Property Type="Int32" Name="ObiectivID" Nullable="false" />
+          <Property Type="String" Name="Denumire" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getTop3Hotels_Result">
+          <Property Type="Int32" Name="CazareID" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getTop3Restaurants_Result">
+          <Property Type="Int32" Name="RestaurantID" Nullable="false" />
+          <Property Type="String" Name="Nume" Nullable="false" MaxLength="255" />
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="Double" Name="UserReview" Nullable="false" />
+          <Property Type="Double" Name="UserPricing" Nullable="false" />
+          <Property Type="Int32" Name="NrReviewuri" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getTypes_Result">
+          <Property Type="Binary" Name="Poza" Nullable="true" />
+          <Property Type="String" Name="Denumire" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="KindNumber" Nullable="true" />
+          <Property Type="Int32" Name="CategorieID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TripAdvisorModelStoreContainer" CdmEntityContainer="TripAdvisorEntities">
+          <EntitySetMapping Name="Camere">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Camere">
+              <MappingFragment StoreEntitySet="Camere">
+                <ScalarProperty Name="CameraID" ColumnName="CameraID" />
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="NumarPaturi" ColumnName="NumarPaturi" />
+                <ScalarProperty Name="PretPerNoapte" ColumnName="PretPerNoapte" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriiObiective">
+            <EntityTypeMapping TypeName="TripAdvisorModel.CategoriiObiective">
+              <MappingFragment StoreEntitySet="CategoriiObiective">
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cazare">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Cazare">
+              <MappingFragment StoreEntitySet="Cazare">
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="OrasID" ColumnName="OrasID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="NrTelefon" ColumnName="NrTelefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obiective">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Obiective">
+              <MappingFragment StoreEntitySet="Obiective">
+                <ScalarProperty Name="ObiectivID" ColumnName="ObiectivID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Locatie" ColumnName="Locatie" />
+                <ScalarProperty Name="OrasID" ColumnName="OrasID" />
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orase">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Orase">
+              <MappingFragment StoreEntitySet="Orase">
+                <ScalarProperty Name="OrasID" ColumnName="OrasID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="TaraID" ColumnName="TaraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Preparate">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Preparate">
+              <MappingFragment StoreEntitySet="Preparate">
+                <ScalarProperty Name="PreparatID" ColumnName="PreparatID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecenziiActivitati">
+            <EntityTypeMapping TypeName="TripAdvisorModel.RecenziiActivitati">
+              <MappingFragment StoreEntitySet="RecenziiActivitati">
+                <ScalarProperty Name="RecenzieID" ColumnName="RecenzieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ObiectivID" ColumnName="ObiectivID" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="Comentarii" ColumnName="Comentarii" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecenziiHoteluri">
+            <EntityTypeMapping TypeName="TripAdvisorModel.RecenziiHoteluri">
+              <MappingFragment StoreEntitySet="RecenziiHoteluri">
+                <ScalarProperty Name="RecenzieID" ColumnName="RecenzieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Comentarii" ColumnName="Comentarii" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecenziiRestaurante">
+            <EntityTypeMapping TypeName="TripAdvisorModel.RecenziiRestaurante">
+              <MappingFragment StoreEntitySet="RecenziiRestaurante">
+                <ScalarProperty Name="RecenzieID" ColumnName="RecenzieID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Comentarii" ColumnName="Comentarii" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurante">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Restaurante">
+              <MappingFragment StoreEntitySet="Restaurante">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="OrasID" ColumnName="OrasID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="NumarTelefon" ColumnName="NumarTelefon" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tari">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Tari">
+              <MappingFragment StoreEntitySet="Tari">
+                <ScalarProperty Name="TaraID" ColumnName="TaraID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizatori">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Utilizatori">
+              <MappingFragment StoreEntitySet="Utilizatori">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="NrTelefon" ColumnName="NrTelefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PozeActivitati">
+            <EntityTypeMapping TypeName="TripAdvisorModel.PozeActivitati">
+              <MappingFragment StoreEntitySet="PozeActivitati">
+                <ScalarProperty Name="ObiectivID" ColumnName="ObiectivID" />
+                <ScalarProperty Name="UtilizatorID" ColumnName="UtilizatorID" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PozeHotel">
+            <EntityTypeMapping TypeName="TripAdvisorModel.PozeHotel">
+              <MappingFragment StoreEntitySet="PozeHotel">
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="UtilizatorID" ColumnName="UtilizatorID" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PozeRestaurante">
+            <EntityTypeMapping TypeName="TripAdvisorModel.PozeRestaurante">
+              <MappingFragment StoreEntitySet="PozeRestaurante">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervari">
+            <EntityTypeMapping TypeName="TripAdvisorModel.Rezervari">
+              <MappingFragment StoreEntitySet="Rezervari">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CameraID" ColumnName="CameraID" />
+                <ScalarProperty Name="DataCheckin" ColumnName="DataCheckin" />
+                <ScalarProperty Name="DataCheckout" ColumnName="DataCheckout" />
+                <ScalarProperty Name="DataRezervarii" ColumnName="DataRezervarii" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Meniu" TypeName="TripAdvisorModel.Meniu" StoreEntitySet="Meniu">
+            <EndProperty Name="Preparate">
+              <ScalarProperty Name="PreparatID" ColumnName="PreparatID" />
+            </EndProperty>
+            <EndProperty Name="Restaurante">
+              <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="getActivities" FunctionName="TripAdvisorModel.Store.getActivities">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getActivities_Result">
+                <ScalarProperty Name="ObiectivID" ColumnName="ObiectivID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getActivitiesbyType" FunctionName="TripAdvisorModel.Store.getActivitiesbyType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getActivitiesbyType_Result">
+                <ScalarProperty Name="ObiectivID" ColumnName="ObiectivID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getActivitiesCategory" FunctionName="TripAdvisorModel.Store.getActivitiesCategory" />
+          <FunctionImportMapping FunctionImportName="getActivitiesDetails" FunctionName="TripAdvisorModel.Store.getActivitiesDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getActivitiesDetails_Result">
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getActivitiesPhotos" FunctionName="TripAdvisorModel.Store.getActivitiesPhotos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getActivitiesPhotos_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getActivityReviews" FunctionName="TripAdvisorModel.Store.getActivityReviews">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getActivityReviews_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="Comentarii" ColumnName="Comentarii" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getHotelDetails" FunctionName="TripAdvisorModel.Store.getHotelDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getHotelDetails_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NrTelefon" ColumnName="NrTelefon" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getHotelPhotos" FunctionName="TripAdvisorModel.Store.getHotelPhotos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getHotelPhotos_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getHotelReviews" FunctionName="TripAdvisorModel.Store.getHotelReviews">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getHotelReviews_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Comentarii" ColumnName="Comentarii" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getHotelRoomPhotos" FunctionName="TripAdvisorModel.Store.getHotelRoomPhotos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getHotelRoomPhotos_Result">
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="NumarPaturi" ColumnName="NumarPaturi" />
+                <ScalarProperty Name="KindNumber" ColumnName="KindNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getHotelRooms" FunctionName="TripAdvisorModel.Store.getHotelRooms" />
+          <FunctionImportMapping FunctionImportName="getHotels" FunctionName="TripAdvisorModel.Store.getHotels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getHotels_Result">
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getHotelsByRooms" FunctionName="TripAdvisorModel.Store.getHotelsByRooms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getHotelsByRooms_Result">
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPreparate" FunctionName="TripAdvisorModel.Store.getPreparate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getPreparate_Result">
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="KindNumber" ColumnName="KindNumber" />
+                <ScalarProperty Name="PreparatID" ColumnName="PreparatID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRestaurantDetails" FunctionName="TripAdvisorModel.Store.getRestaurantDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getRestaurantDetails_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="NumarTelefon" ColumnName="NumarTelefon" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRestaurantMenu" FunctionName="TripAdvisorModel.Store.getRestaurantMenu" />
+          <FunctionImportMapping FunctionImportName="getRestaurantPhotos" FunctionName="TripAdvisorModel.Store.getRestaurantPhotos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getRestaurantPhotos_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRestaurantReviews" FunctionName="TripAdvisorModel.Store.getRestaurantReviews">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getRestaurantReviews_Result">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Stele" ColumnName="Stele" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Comentarii" ColumnName="Comentarii" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRestaurants" FunctionName="TripAdvisorModel.Store.getRestaurants">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getRestaurants_Result">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRestaurantsByFood" FunctionName="TripAdvisorModel.Store.getRestaurantsByFood">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getRestaurantsByFood_Result">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getTop3Activities" FunctionName="TripAdvisorModel.Store.getTop3Activities">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getTop3Activities_Result">
+                <ScalarProperty Name="ObiectivID" ColumnName="ObiectivID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getTop3Hotels" FunctionName="TripAdvisorModel.Store.getTop3Hotels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getTop3Hotels_Result">
+                <ScalarProperty Name="CazareID" ColumnName="CazareID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getTop3Restaurants" FunctionName="TripAdvisorModel.Store.getTop3Restaurants">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getTop3Restaurants_Result">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="UserReview" ColumnName="UserReview" />
+                <ScalarProperty Name="UserPricing" ColumnName="UserPricing" />
+                <ScalarProperty Name="NrReviewuri" ColumnName="NrReviewuri" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getTypes" FunctionName="TripAdvisorModel.Store.getTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripAdvisorModel.getTypes_Result">
+                <ScalarProperty Name="Poza" ColumnName="Poza" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="KindNumber" ColumnName="KindNumber" />
+                <ScalarProperty Name="CategorieID" ColumnName="CategorieID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

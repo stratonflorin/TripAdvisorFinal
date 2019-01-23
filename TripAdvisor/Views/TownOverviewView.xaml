@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="TripAdvisor.Views.TownOverviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TripAdvisor.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="1020">
+
+    <UserControl.Resources>
+        <Style x:Key="TextblockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="FontFamily" Value="Heebo" />
+            <Setter Property="Foreground" Value="#FF0D4F36"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <BitmapImage x:Key="DefaultImage" UriSource="/Resources/noimage.jpg"/>
+    </UserControl.Resources>
+    
+    <Grid Background="AliceBlue" Name="Grid_TownOverview">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Top 3 Restautants -->
+        <TextBlock Text="{Binding StringFormat='Best Restaurants in {0}:'}" Name="Textblock_bestRestaurants"
+                       Style="{StaticResource TextblockStyle}"/>
+        <ListView Name="Listview_topRestaurants" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      SelectionChanged="Listview_topRestaurants_SelectionChanged" Grid.Row="1" Margin="20,0,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF084935" CornerRadius="15" BorderThickness="3" Background="#D0FAEE"
+                            Width="300" VerticalAlignment="Top">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Nume}" Style="{StaticResource TextblockStyle}"
+                                   Name="Textblock_nume" TextWrapping="Wrap" FontSize="14" />
+                            <DockPanel Width="300">
+                                <Image VerticalAlignment="Top" MaxWidth="140" HorizontalAlignment="Left"
+                                       Source="{Binding Poza,TargetNullValue={StaticResource DefaultImage},
+                                        FallbackValue={StaticResource DefaultImage}}"/>
+
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <TextBlock Text="{Binding NrReviewuri, StringFormat=' {0} reviews'}" FontSize="12" FontWeight="Regular"
+                                               Style="{StaticResource TextblockStyle}"/>
+                                    <materialDesign:RatingBar Name="Bar_userRating" Value="{Binding UserReview}" Height="20" Width="120"
+                                             Margin="3" Foreground="Yellow" Background="Gray"/>
+                                    <TextBlock Text="{Binding UserReview, StringFormat='User rating: {0}'}" FontSize="12" FontWeight="Regular"
+                                               Style="{StaticResource TextblockStyle}"/>
+                                    <ProgressBar Name="Bar_userPricing"
+                                             Value="{Binding UserPricing}"
+                                             Width="120" Height="10"
+                                             Minimum="0" Maximum="5"
+                                             Margin="3" Foreground="Green"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Userpricing, StringFormat='User pricing: {0}'}"
+                                           FontSize="12" FontWeight="Regular" Style="{StaticResource TextblockStyle}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+
+        <!-- Top 3 Hotels -->
+
+        <TextBlock Text="{Binding StringFormat='Best Hotels in {0}:'}" Grid.Row="2" Name="Textblock_bestHotels"
+                   Style="{StaticResource TextblockStyle}"/>
+        <ListView Name="Listview_topHotels" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="140"
+                   SelectionChanged="Listview_topHotels_SelectionChanged" Grid.Row="3" Margin="20,0,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF084935" CornerRadius="15" BorderThickness="3" Background="#D0FAEE"
+                            Width="300" VerticalAlignment="Top">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Nume}" Style="{StaticResource TextblockStyle}"
+                                   Name="Textblock_nume" TextWrapping="Wrap" FontSize="14" />
+                            <DockPanel Width="300">
+                                <Image VerticalAlignment="Top" MaxWidth="140" HorizontalAlignment="Left"
+                                       Source="{Binding Poza,TargetNullValue={StaticResource DefaultImage},
+                                        FallbackValue={StaticResource DefaultImage}}"/>
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding NrReviewuri, StringFormat=' {0} reviews'}" FontSize="12" FontWeight="Regular"
+                                               Style="{StaticResource TextblockStyle}"/>
+                                    <materialDesign:RatingBar Name="Bar_userRating" Value="{Binding UserReview}" Height="20" Width="120"
+                                             Margin="3" Foreground="Yellow" Background="Gray"/>
+                                    <TextBlock Text="{Binding UserReview, StringFormat='User rating: {0}'}" FontSize="12" FontWeight="Regular"
+                                               Style="{StaticResource TextblockStyle}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+        <!--Top 3 activities-->
+
+        <TextBlock Text="{Binding StringFormat='Best Things to do in {0}:'}" Grid.Row="4" Name="Textblock_bestActivities"
+                       Style="{StaticResource TextblockStyle}"/>
+        
+        <ListView Name="Listview_topThingstodo" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                      SelectionChanged="Listview_topThingstodo_SelectionChanged" Grid.Row="5" Margin="20,0,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF084935" CornerRadius="15" BorderThickness="3" Background="#D0FAEE"
+                            Width="300" VerticalAlignment="Top">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Denumire}" Style="{StaticResource TextblockStyle}"
+                                   Name="Textblock_nume" TextWrapping="Wrap" FontSize="14"/>
+                            <DockPanel Width="300">
+                                <Image VerticalAlignment="Top" MaxWidth="140" HorizontalAlignment="Left"
+                                       Source="{Binding Poza,TargetNullValue={StaticResource DefaultImage},
+                                        FallbackValue={StaticResource DefaultImage}}"/>
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding NrReviewuri, StringFormat=' {0} reviews'}" FontSize="12" FontWeight="Regular"
+                                               Style="{StaticResource TextblockStyle}"/>
+                                    <materialDesign:RatingBar Name="Bar_userRating" Value="{Binding UserReview}" Height="20" Width="120"
+                                             Margin="3" Foreground="Yellow" Background="Gray"/>
+                                    <TextBlock Text="{Binding UserReview, StringFormat='User rating: {0}'}" FontSize="12" FontWeight="Regular"
+                                               Style="{StaticResource TextblockStyle}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>

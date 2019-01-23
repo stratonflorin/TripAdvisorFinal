@@ -1,0 +1,66 @@
+getRestaurants_Result()
+        {
+
+        }
+        public getRestaurants_Result(string nume, byte[] poza)
+        {
+            Nume = nume;
+            Poza = poza;
+        }
+---
+
+getRestaurantPhotos_Result()
+        {
+
+        }
+
+        public getRestaurantPhotos_Result(string nume,string prenume, byte[] poza, Nullable<System.DateTime> data )
+        {
+            Nume = nume;
+            Prenume = prenume;
+            Poza = poza;
+            Data = data;
+        }
+
+
+----
+
+getActivities_Result()
+        {
+
+        }
+        public getActivities_Result(string nume, byte[] poza)
+        {
+            Denumire = nume;
+            Poza = poza;
+        }
+
+---
+
+getActivitiesPhotos_Result()
+        {
+
+        }
+
+        public getActivitiesPhotos_Result(string nume, string prenume, byte[] poza, Nullable<System.DateTime> data)
+        {
+            Nume = nume;
+            Prenume = prenume;
+            Poza = poza;
+            Data = data;
+        }
+
+---
+
+getHotelPhotos_Result()
+        {
+
+        }
+
+        public getHotelPhotos_Result(string nume, string prenume, byte[] poza)
+        {
+            Nume = nume;
+            Prenume = prenume;
+            Poza = poza;
+           
+        }
